@@ -1,0 +1,52 @@
+{
+  "name": "microduck-playground",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Private Microduck simulation and browser CPU training playground with an optional local AI assistant.",
+  "engines": { "node": ">=24" },
+  "overrides": {
+    "devalue": "5.9.3",
+    "source-map-js": "1.2.2"
+  },
+  "scripts": {
+    "prepare-assets": "node scripts/prepare-assets.mjs",
+    "predev": "npm run prepare-assets",
+    "dev": "vite",
+    "prebuild": "npm run prepare-assets",
+    "build": "svelte-check --tsconfig ./tsconfig.json && vite build",
+    "preview": "vite preview",
+    "typecheck": "svelte-check --tsconfig ./tsconfig.json",
+    "check:release": "node scripts/check-release.mjs",
+    "check:env": "node scripts/check-env.ts",
+    "check:standup": "node scripts/check-standup.mjs",
+    "check:grad": "node scripts/check-grad.ts",
+    "check:ppo": "node scripts/check-ppo.ts",
+    "check:trainer": "node scripts/check-trainer.ts",
+    "check:motion": "node scripts/check-motion.ts",
+    "check:world": "node scripts/check-world.ts",
+    "check:policies": "node scripts/check-policies.ts",
+    "check:controller": "node scripts/check-controller.ts && node --test src/sim/controller-replay.test.ts src/lib/session-replay.test.ts",
+    "check:motion-library": "node scripts/check-motion-library.ts",
+    "check:tasks": "node --test src/train/env/acrobatics.test.ts src/train/env/tasks.test.ts src/train/task-rollout.test.ts src/train/checkpoint-task.test.ts src/train/checkpoint-policy.test.ts",
+    "check:playground": "npm run check:world && npm run check:policies && npm run check:controller && npm run check:motion-library && npm run check:tasks",
+    "check:assistant": "node --test src/assistant/contract.test.ts src/assistant/apply.test.ts src/assistant/training.test.ts src/assistant/commands.test.ts src/motion/motion-store.test.ts src/lib/assistant-session.test.mjs src/lib/training-session.test.mjs src/train/train-worker.test.mjs src/train/evaluation.test.ts server/assistant.test.ts",
+    "check": "node scripts/check-node-compat.mjs && npm run typecheck && npm run check:grad && npm run check:kernels && npm run check:ppo && npm run check:env && npm run check:motion && npm run check:trainer && npm run check:playground && npm run check:assistant",
+    "profile": "node scripts/profile-train.ts",
+    "build:kernels": "node scripts/build-kernels.mjs",
+    "check:kernels": "node scripts/check-kernels.ts"
+  },
+  "dependencies": {
+    "@mujoco/mujoco": "^3.12.0",
+    "onnxruntime-web": "^1.23.0",
+    "three": "^0.180.0"
+  },
+  "devDependencies": {
+    "@sveltejs/vite-plugin-svelte": "^7.3.0",
+    "@types/three": "^0.180.0",
+    "svelte": "^5.57.0",
+    "svelte-check": "^4.7.6",
+    "typescript": "^5.9.2",
+    "vite": "^8.2.2"
+  }
+}

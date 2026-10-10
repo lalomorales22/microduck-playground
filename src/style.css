@@ -1,0 +1,39 @@
+/* Design tokens and the page reset. Everything else is component-scoped. */
+:root {
+  color-scheme: light;
+
+  --bg: #ffffff;
+  --viewport: #ffffff;
+  --panel: #f8f9fa;
+  --panel-hi: #eef0f2;
+  --line: #d4d8dd;
+  --line-hi: #858d96;
+
+  --ink: #171717;
+  --muted: #5b626b;
+  --muted-hi: #3f4650;
+
+  --accent: #ffcc32;
+  --accent-hi: #f3bc1b;
+  --accent-ink: #171717;
+  --accent-text: #725300;
+  --control-accent: #363636;
+  --focus: #725300;
+
+  --ok: #16734b;
+  --warn: #875500;
+  --danger: #b42332;
+
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-size: 14px;
+  letter-spacing: 0;
+}
+
+* { box-sizing: border-box; }
+html, body { height: 100%; margin: 0; }
+body { background: var(--bg); color: var(--ink); overflow: hidden; }
+#app { height: 100%; }
+
+:focus-visible { outline: 2px solid var(--focus); outline-offset: 1px; }
+input::placeholder, textarea::placeholder { color: var(--muted); opacity: 1; }
+::selection { background: var(--accent); color: var(--accent-ink); }

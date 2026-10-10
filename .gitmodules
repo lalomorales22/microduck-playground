@@ -1,0 +1,3 @@
+[submodule "microduck_rl"]
+	path = microduck_rl
+	url = https://github.com/pollen-robotics/microduck_rl
